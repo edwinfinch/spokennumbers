@@ -60,6 +60,15 @@ void fix_fonts(){
 	else{
 		text_layer_set_font(word_2, gotham_bold_c);
 	}
+	
+	if(isFreshHour){
+		text_layer_set_font(word_3, gotham_bold_c1);
+		layer_set_hidden(text_layer_get_layer(word_2), true);
+	}
+	else{
+		text_layer_set_font(word_3, gotham_bold_c);
+		layer_set_hidden(text_layer_get_layer(word_2), false);
+	}
 }
 
 void try_override(){
@@ -70,21 +79,21 @@ void try_override(){
 		text_layer_set_text(word_3, "HUNDRED");
 		if(hourIsOver10){
 			if(hour < 20){
-				snprintf(word2_buffer, sizeof(word2_buffer), "ZERO %s", teens[hour-11]);
+				snprintf(word1_buffer, sizeof(word1_buffer), "%s", teens[hour-11]);
 			}
 			else{
-				snprintf(word2_buffer, sizeof(word2_buffer), "ZERO %s", extra_hour_words[hour-21]);
+				snprintf(word1_buffer, sizeof(word1_buffer), "%s", extra_hour_words[hour-21]);
 			}
 		}
 		else{
-			snprintf(word2_buffer, sizeof(word2_buffer), " ZERO %s", ones[hour]);
+			snprintf(word1_buffer, sizeof(word1_buffer), " ZERO %s", ones[hour]);
 		}
-		text_layer_set_text(word_1, word2_buffer);
+		text_layer_set_text(word_1, word1_buffer);
 	}
 	
 	if(minuteIsTeens){
-		snprintf(word3_buffer, sizeof(word3_buffer), "%s", teens[minute-11]);
-		text_layer_set_text(word_2, word3_buffer);
+		snprintf(word2_buffer, sizeof(word2_buffer), "%s", teens[minute-11]);
+		text_layer_set_text(word_2, word2_buffer);
 		text_layer_set_text(word_3, " ");
 	}
 }
