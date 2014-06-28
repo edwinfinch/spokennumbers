@@ -22,12 +22,86 @@ static TextLayer* text_layer_init(GRect location, GColor background, GTextAlignm
 	return layer;
 }
 
+bool get_teen_status(){
+	bool teen = 0;
+	if(minute > 10 && minute < 20){
+		teen = true;
+	}
+	return teen;
+}
+
+bool get_fresh_hour(){
+	bool fresh;
+	if(minute == 0){
+		fresh = 1;
+	}
+	else{
+		fresh = 0;
+	}
+	return fresh;
+}
+
+bool get_hour_over_10(){
+	bool isTrue;
+	if(hour > 10){
+		isTrue = 1;
+	}
+	else{
+		isTrue = 0;
+	}
+	return isTrue;
+}
+
+void fix_fonts(){
+	if(hour > 12){
+		text_layer_set_font(word_1, gotham_bold_c1);
+	}
+	else{
+		text_layer_set_font(word_1, gotham_bold_c);
+	}
+	
+	if(minuteIsTeens){
+		text_layer_set_font(word_2, gotham_bold_c1);
+	}
+	else{
+		text_layer_set_font(word_2, gotham_bold_c);
+	}
+}
+
+void try_override(){
+	//I know I fucked up the buffers here but shut up and deal with it
+	//Sorry
+	if(isFreshHour){
+		text_layer_set_text(word_1, "ZERO");
+		text_layer_set_text(word_3, "HUNDRED");
+		text_layer_set_text(word_4, " ");
+		if(hourIsOver10){
+			if(hour < 20){
+				snprintf(word2_buffer, sizeof(word2_buffer), "ZERO %s", teens[hour-11]);
+			}
+			else{
+				snprintf(word2_buffer, sizeof(word2_buffer), "ZERO %s", extra_hour_words[hour-21]);
+			}
+		}
+		else{
+			snprintf(word2_buffer, sizeof(word2_buffer), " ZERO %s", ones[hour]);
+		}
+		text_layer_set_text(word_1, word2_buffer);
+	}
+	
+	if(minuteIsTeens){
+		snprintf(word3_buffer, sizeof(word3_buffer), "%s", teens[minute-11]);
+		text_layer_set_text(word_2, word3_buffer);
+		text_layer_set_text(word_3, " ");
+	}
+}
+
 void update_hour(){
 	//APP_LOG(APP_LOG_LEVEL_INFO, "Hour");
 	if(hour < 11){
 		snprintf(word1_buffer, sizeof(word1_buffer), "%s", ones[hour]);
 	}
-	else if(hour > 10 && hour < 20){
+	else if(hourIsOver10 && hour < 20){
 		snprintf(word1_buffer, sizeof(word1_buffer), "%s", teens[hour-11]);
 	}
 	else{
@@ -54,14 +128,20 @@ void update_minute_2(){
 void tick_handler(struct tm *tick_time, TimeUnits units_changed){
 	minute = tick_time->tm_min;
 	hour = tick_time->tm_hour;
+	isFreshHour = get_fresh_hour();
+	hourIsOver10 = get_hour_over_10();
+	minuteIsTeens = get_teen_status();
 	update_hour();
 	update_minute_1();
 	update_minute_2();
+	try_override();
+	fix_fonts();
 }
 
 void window_load(Window *window){
 	Layer *window_layer = window_get_root_layer(window);
 	gotham_bold_c = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_31));
+	gotham_bold_c1 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_25));
 	word_1 = text_layer_init(GRect(0, 0, 144, 168), GColorClear, GTextAlignmentLeft, 1);
 	word_2 = text_layer_init(GRect(0, 60, 144, 168), GColorClear, GTextAlignmentLeft, 1);
 	word_3 = text_layer_init(GRect(0, 90, 144, 168), GColorClear, GTextAlignmentLeft, 1);

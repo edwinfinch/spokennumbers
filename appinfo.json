@@ -1,7 +1,7 @@
 {
     "uuid": "6adcc791-5e43-4c04-9181-d225f1bfdea4",
     "longName": "Spoken Numbers",
-    "versionLabel": "1.0.2",
+    "versionLabel": "1.1.0",
     "companyName": "Edwin Finch",
     "capabilities": [
         ""
@@ -13,6 +13,11 @@
                 "menuIcon": true,
                 "name": "MENU_IMAGE",
                 "file": "images/download.png"
+            },
+            {
+                "type": "font",
+                "name": "FONT_GOTHAM_BOLD_25",
+                "file": "fonts/gotham_bold_36.ttf"
             },
             {
                 "type": "font",

@@ -3,9 +3,10 @@ TextLayer *word_1, *word_2, *word_3, *word_4;
 
 InverterLayer *theme;
 
-GFont *gotham_bold_c;
+GFont *gotham_bold_c, *gotham_bold_c1;
 
 int minute, hour;
+bool isFreshHour, hourIsOver10, minuteIsTeens;
 
 char word1_buffer[] = "Rick and Morty";
 char word2_buffer[] = "rickandmorty.com";
@@ -25,7 +26,7 @@ char *teens[] = {
 };
 
 char *tens[] = {
-	"",
+	"ZERO",
 	"TEN",
 	"TWENTY",
 	"THIRTY",
