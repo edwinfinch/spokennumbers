@@ -1,0 +1,30 @@
+{
+    "uuid": "6adcc791-5e43-4c04-9181-d225f1bfdea4",
+    "longName": "Spoken Numbers",
+    "versionLabel": "1.0.1",
+    "companyName": "Edwin Finch",
+    "capabilities": [
+        ""
+    ],
+    "resources": {
+        "media": [
+            {
+                "type": "png",
+                "menuIcon": true,
+                "name": "MENU_IMAGE",
+                "file": "images/download.png"
+            },
+            {
+                "type": "font",
+                "name": "FONT_GOTHAM_BOLD_31",
+                "file": "fonts/gotham_bold_36.ttf"
+            }
+        ]
+    },
+    "shortName": "Spoken Numbers",
+    "versionCode": 1,
+    "watchapp": {
+        "watchface": true
+    },
+    "appKeys": {}
+}
