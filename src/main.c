@@ -75,6 +75,14 @@ void window_load(Window *window){
 	layer_add_child(window_layer, text_layer_get_layer(word_3));
 	layer_add_child(window_layer, text_layer_get_layer(word_4));
 	layer_add_child(window_layer, inverter_layer_get_layer(theme));
+	
+	//Load time instantly
+	struct tm *t;
+  	time_t temp;        
+  	temp = time(NULL);        
+  	t = localtime(&temp);
+	
+	tick_handler(t, SECOND_UNIT);
 }
 
 void window_unload(Window *window){
