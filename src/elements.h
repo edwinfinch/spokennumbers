@@ -35,6 +35,7 @@ char *tens[] = {
 };
 
 char *extra_hour_words[] = {
+	"TWENTY",
 	"TWENTY ONE",
 	"TWENTY TWO",
 	"TWENTY THREE",

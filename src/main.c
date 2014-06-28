@@ -31,23 +31,17 @@ bool get_teen_status(){
 }
 
 bool get_fresh_hour(){
-	bool fresh;
+	bool fresh = 0;
 	if(minute == 0){
 		fresh = 1;
-	}
-	else{
-		fresh = 0;
 	}
 	return fresh;
 }
 
 bool get_hour_over_10(){
-	bool isTrue;
+	bool isTrue = 0;
 	if(hour > 10){
 		isTrue = 1;
-	}
-	else{
-		isTrue = 0;
 	}
 	return isTrue;
 }
@@ -74,7 +68,6 @@ void try_override(){
 	if(isFreshHour){
 		text_layer_set_text(word_1, "ZERO");
 		text_layer_set_text(word_3, "HUNDRED");
-		text_layer_set_text(word_4, " ");
 		if(hourIsOver10){
 			if(hour < 20){
 				snprintf(word2_buffer, sizeof(word2_buffer), "ZERO %s", teens[hour-11]);
@@ -104,8 +97,8 @@ void update_hour(){
 	else if(hourIsOver10 && hour < 20){
 		snprintf(word1_buffer, sizeof(word1_buffer), "%s", teens[hour-11]);
 	}
-	else{
-		snprintf(word1_buffer, sizeof(word1_buffer), "%s", extra_hour_words[hour-21]);
+	else if(hour >= 20){
+		snprintf(word1_buffer, sizeof(word1_buffer), "%s", extra_hour_words[hour-20]);
 	}
 	text_layer_set_text(word_1, word1_buffer);
 	//APP_LOG(APP_LOG_LEVEL_INFO, "Wrote hour");
