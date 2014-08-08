@@ -150,7 +150,7 @@ void window_load(Window *window){
 	word_4 = text_layer_init(GRect(0, 130, 144, 168), GColorClear, GTextAlignmentLeft, 2);
 	theme = inverter_layer_create(GRect(0, 0, 144, 168));
 	
-	text_layer_set_text(word_4, "HOURS");
+	text_layer_set_text(word_4, "JULIET");
 	
 	layer_add_child(window_layer, text_layer_get_layer(word_1));
 	layer_add_child(window_layer, text_layer_get_layer(word_2));
